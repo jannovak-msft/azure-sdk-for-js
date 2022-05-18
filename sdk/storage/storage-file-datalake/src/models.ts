@@ -665,12 +665,44 @@ export interface PathCreateOptions extends CommonOptions {
   metadata?: Metadata;
   permissions?: string; // TODO: model or string?
   umask?: string; // TODO: model or string?
+  /**
+   * Optional. The owner of the blob or directory.
+   */
+  owner?: string;
+  /**
+   * Optional. The owning group of the blob or directory.
+   */
+  group?: string;
+  /**
+   * Optional. POSIX access control rights on files and directories.
+   */
+  acl?: PathAccessControlItem[];
   conditions?: DataLakeRequestConditions;
   pathHttpHeaders?: PathCreateHttpHeaders;
   /**
    * Customer Provided Key Info.
    */
   customerProvidedKey?: CpkInfo;
+  /**
+   * Proposed lease ID, in a GUID string format. The Blob service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats.
+   */
+  proposedLeaseId?: string;
+  /**
+   * The lease duration is required to acquire a lease, and specifies the duration of the lease in seconds.  The lease duration must be between 15 and 60 seconds or -1 for infinite lease.
+   */
+  leaseDuration?: number;
+  /**
+   * Optional. Duration before file should be deleted in milliseconds.
+   * Does not apply to directories.
+   * <see cref="timeToExpireInMs"/> and <see cref="expiresOn"/> cannot both be set.
+   */
+  timeToExpireInMs?: number;
+  /**
+   * Optional. The time to set for when the path will be deleted.
+   * Does not apply to directories.
+   * <see cref="timeToExpireInMs"/> and <see cref="expiresOn"/> cannot both be set.
+   */
+  expiresOn?: Date;
 }
 
 export interface PathCreateIfNotExistsOptions extends CommonOptions {
@@ -678,11 +710,43 @@ export interface PathCreateIfNotExistsOptions extends CommonOptions {
   metadata?: Metadata;
   permissions?: string;
   umask?: string;
+  /**
+   * Optional. The owner of the blob or directory.
+   */
+  owner?: string;
+  /**
+   * Optional. The owning group of the blob or directory.
+   */
+  group?: string;
+  /**
+   * Optional. POSIX access control rights on files and directories.
+   */
+  acl?: PathAccessControlItem[];
   pathHttpHeaders?: PathCreateHttpHeaders;
   /**
    * Customer Provided Key Info.
    */
   customerProvidedKey?: CpkInfo;
+  /**
+   * Proposed lease ID, in a GUID string format. The Blob service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats.
+   */
+  proposedLeaseId?: string;
+  /**
+   * The lease duration is required to acquire a lease, and specifies the duration of the lease in seconds.  The lease duration must be between 15 and 60 seconds or -1 for infinite lease.
+   */
+  leaseDuration?: number;
+  /**
+   * Optional. Duration before file should be deleted in milliseconds.
+   * Does not apply to directories.
+   * <see cref="timeToExpireInMs"/> and <see cref="expiresOn"/> cannot both be set.
+   */
+  timeToExpireInMs?: number;
+  /**
+   * Optional. The time to set for when the path will be deleted.
+   * Does not apply to directories.
+   * <see cref="timeToExpireInMs"/> and <see cref="expiresOn"/> cannot both be set.
+   */
+  expiresOn?: Date;
 }
 
 export interface PathDeleteOptions extends CommonOptions {
